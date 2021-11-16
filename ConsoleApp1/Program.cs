@@ -136,25 +136,12 @@ class Program
 
         //AverageWordLength("Dude, this is so awesome!");
 
-        WhatIs_A_plus_B_times_C(30, 20, 8);
+        MinTurns("4089", "5672");
     }
-    public static int WhatIs_A_plus_B_times_C(int SumA, int SumB, int SumC)
-    {
-        int ttlSum = SumA + SumB + SumC;  // sum = 58
-        for (int a = 0; a < SumA; a++)
-        {
-            for (int b = 0; b < SumB; b++)
-            {
-                for (int c = 0; c < SumC; c++)
-                {
-
-                }
-            }
-        }
+    
 
 
-        return 0;
-    }
+
 
     public static double AverageWordLength(string str)
     {
@@ -220,33 +207,29 @@ class Program
         Console.WriteLine(result);
         return result;
     }
-    //public static int MinTurns(string current, string target)
-    //{
-    //    int[] start = new int[4];
-    //    int[] end = new int[4];
-    //    int finalCount = 0, tempCount1 = 0, tempCount2 = 0;
+    public static int MinTurns(string current, string target)
+    {
+        int start = int.Parse(current);
+        int end = int.Parse(target);
+        int rotation = 0;
+        int input_digit, code_digit;
 
-    //    for (int i = 0; i < 4; i++)
-    //    {
-    //        start[i] = int.Parse(current[i].ToString());
-    //        end[i] = int.Parse(target[i].ToString());
-    //    }
+        while (start > 0 || end > 0)
+        {
+            // get last digit of each
+            input_digit = start % 10;
+            code_digit = end % 10;
 
-    //    for (int i = 0; i < 10; i++)
-    //    {
-    //        if (start[i] == end[i])
-    //        {
-    //            tempCount1 = 1;
-    //        }
-    //        else
-    //        {
-    //            tempCount1 =
-    //        }
-    //    }
+            // find min rotation
+            rotation += Math.Min(Math.Abs(input_digit - code_digit),
+                10 - Math.Abs(input_digit - code_digit));
 
+            start /= 10; end /= 10;
+        }
+        Console.WriteLine(rotation);
 
-    //    return 0;
-    //}
+        return rotation;
+    }
 
     public static bool AlmostPalindrome(string str)
     {
