@@ -5,6 +5,12 @@ using System.Text.RegularExpressions;
 using System.Numerics;
 using System.Globalization;
 
+
+// CTRL X deletes a line!
+// cw tab = Console.WriteLine!
+
+
+
 class Program
 {
     static void Main()
@@ -209,10 +215,15 @@ class Program
     }
     public static int MinTurns(string current, string target)
     {
-        int start = int.Parse(current);
-        int end = int.Parse(target);
+        // current: "4089"
+        // target:  "5672"
+
+        int start = int.Parse(current); // 4089
+        int end = int.Parse(target);    // 5672
         int rotation = 0;
         int input_digit, code_digit;
+        int[] turns = new int[4];       // lock is always 4 digits
+        int count = 4;
 
         while (start > 0 || end > 0)
         {
@@ -221,12 +232,33 @@ class Program
             code_digit = end % 10;
 
             // find min rotation
+            int forwards, backwards, lowest;
+
+
+            // TODO need an if/then to determine which is forwards and backwards
+            forwards = (Math.Abs(input_digit - code_digit));
+            backwards = (10 - Math.Abs(input_digit - code_digit));
+
+            lowest = Math.Min(forwards, backwards);
+            turns[count - 1] = lowest;
+
+            Console.WriteLine("SHOULD be: 7, 3 / 1, 9 / 4, 6 / 9, 1");
+            Console.WriteLine("input digit " + input_digit + ", code digit " + code_digit);
+            Console.WriteLine(" ACTUALS forwards " + forwards + ", backwards " + backwards + ", lowest " + lowest);
+            Console.WriteLine("");
+
+            // should be 7, 3 / 1, 9 / 4, 6 / 9, 1
+            count--;
+
             rotation += Math.Min(Math.Abs(input_digit - code_digit),
                 10 - Math.Abs(input_digit - code_digit));
 
             start /= 10; end /= 10;
         }
-        Console.WriteLine(rotation);
+        string justForShitsAndGrins = "";
+
+
+
 
         return rotation;
     }
