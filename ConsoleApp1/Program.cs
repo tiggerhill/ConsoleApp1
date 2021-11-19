@@ -140,9 +140,9 @@ class Program
 
         //TextToBinary("one Zero zero one zero zero one one one one one zero oNe one one zero one zerO");
 
-        //AverageWordLength("Dude, this is so awesome!");
+        AverageWordLength("Dude, this is so awesome!");
 
-        MinTurns("4089", "5672");
+        //MinTurns("4089", "5672");
     }
     
 
@@ -172,11 +172,16 @@ class Program
         for (int i = 0; i < words.Length; i++)
         {
             sum += wordLength[i];
-            Console.WriteLine(wordLength[i] + " " + sum);
+            var write = string.Format("lengths are {0} {1} ", wordLength[i], sum);
+            Console.WriteLine(write);
         }
 
+        var writeArray = string.Join(", ", wordLength);
+        Console.WriteLine(writeArray);
+
         double average = Math.Round((double)sum / words.Length, 2);
-        Console.WriteLine(average);
+        Console.WriteLine(@"average is
+" + average);
 
         return average;
 
